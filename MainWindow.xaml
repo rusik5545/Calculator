@@ -1,0 +1,134 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        Title="Nokia 3310" Height="800" Width="320"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ButtonColor" Color="#99958C"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial" ></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Visibility" Value="Hidden"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Arial" ></Setter>
+            <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="Black" 
+                        BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Name="MainGrid" Background="#23282B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Name="OnOff" Click="OnOff_Click" Width="160" Height="30" Panel.ZIndex="99">
+            <TextBlock>On/Off</TextBlock>
+        </Button>
+
+        <Grid Name="ButtonsGrid" Grid.Row="0" Grid.RowSpan="2" IsEnabled="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="240"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Name="FirstRow" Height="0"></RowDefinition>
+                <RowDefinition Name="SecondRow" Height="0"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Name="UpperWindow" Grid.Row="1" Grid.ColumnSpan="4" Background="#23282B">
+                <Grid Name="HotBarLeft" Grid.Row="1" Grid.Column="0">
+                    <Image x:Name="Butareya" Source="C:\Для пар\РПМ\Батарея.png" HorizontalAlignment="Left" Margin="3"></Image>
+                </Grid>
+                <Grid Name="HotBarRight" Grid.Row="1" Grid.Column="3">
+                    <Image x:Name="Time" Source="C:\Для пар\РПМ\16_42.png" HorizontalAlignment="Right" Margin="5"></Image>
+                </Grid>
+            </Grid>
+            <Grid Name="FullWindow" Grid.Row="2" Grid.ColumnSpan="4" Height="240" Background="#23282B">
+                <TextBlock TextAlignment="Right" VerticalAlignment="Bottom" TextWrapping="Wrap" Name="Example2"></TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="3" Grid.ColumnSpan="4" TextAlignment="Right" x:Name="Example" Height="70" Background="#23282B"></TextBlock>
+            <Button Grid.Row="0" Grid.Column="2" Name="Thema" Click="Thema_Click">
+                <TextBlock>Тема</TextBlock>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="3" Name="History" Click="History_Click">
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="Menu">
+                        <MenuItem Header="Удалить историю" Name="DeliteHistory" Click="DeliteHistory_Click"></MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <TextBlock >...</TextBlock>
+            </Button>
+            <Button Grid.Row="4" Name="Delite" Click="Delite_Click">
+                <TextBlock>AC</TextBlock>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="1" Name="DeliteOneNumber" Click="DeliteOneNumber_Click">
+                <TextBlock>Del</TextBlock>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="2" Name="Percent" Click="Percent_Click">
+                <TextBlock>%</TextBlock>
+            </Button>
+            <Button Content=" / " Grid.Row="4" Grid.Column="3" Name="Dividion" Click="Dividion_Click"></Button>
+            <Button Content="7" Grid.Row="5" Name="Seven" Click="Seven_Click"></Button>
+            <Button Content="8" Grid.Row="5" Grid.Column="1" Name="Eight" Click="Eight_Click"></Button>
+            <Button Content="9" Grid.Row="5" Grid.Column="2" Name="Nine" Click="Nine_Click"></Button>
+            <Button Content=" * " Grid.Row="5" Grid.Column="3" Name="Multiplication" Click="Multiplication_Click"></Button>
+            <Button Content="4" Grid.Row="6" Name="Four" Click="Four_Click"></Button>
+            <Button Content="5" Grid.Row="6" Grid.Column="1" Name="Five" Click="Five_Click"></Button>
+            <Button Content="6" Grid.Row="6" Grid.Column="2" Name="Six" Click="Six_Click"></Button>
+            <Button Content=" - " Grid.Row="6" Grid.Column="3" Name="Minus" Click="Minus_Click"></Button>
+            <Button Content="3" Grid.Row="7" Name="Three" Click="Three_Click"></Button>
+            <Button Content="2" Grid.Row="7" Grid.Column="1" Name="Two" Click="Two_Click"></Button>
+            <Button Content="1" Grid.Row="7" Grid.Column="2" Name="One" Click="One_Click"></Button>
+            <Button Content=" + " Grid.Row="7" Grid.Column="3" Name="Plus" Click="Plus_Click"></Button>
+            <Button Grid.Row="8" Name="SwapMod" Click="SwapMod_Click">
+                <TextBlock>И</TextBlock>
+            </Button>
+            <Button Content="0" Grid.Row="8" Grid.Column="1" Name="Null" Click="Null_Click"></Button>
+            <Button Content="." Grid.Row="8" Grid.Column="2" Name="Point" Click="Point_Click"></Button>
+            <Button Grid.Row="8" Grid.Column="3" Name="Answer" Click="Answer_Click">
+                <TextBlock>=</TextBlock>
+            </Button>
+            <Button Content="(" Grid.Row="9" Grid.Column="0" Name="BracetsLeft" Click="BracetsLeft_Click"></Button>
+            <Button Content=")" Grid.Row="9" Grid.Column="1" Name="BracetsRight" Click="BracetsRight_Click"></Button>
+            <Button Content="^" Grid.Row="9" Grid.Column="2" Name="Degree" Click="Degree_Click"></Button>
+            <Button Content="√" Grid.Row="9" Grid.Column="3" Name="Root" Click="Root_Click"></Button>
+            <Button Content="sin" Grid.Row="10" Grid.Column="0" Name="Sin" Click="Sin_Click"></Button>
+            <Button Content="cos" Grid.Row="10" Grid.Column="1" Name="Cos" Click="Cos_Click"></Button>
+            <Button Content="tan" Grid.Row="10" Grid.Column="2" Name="Tan" Click="Tan_Click"></Button>
+            <Button Grid.Row="10" Grid.Column="3" Name="Invers" Click="Invers_Click">
+                <TextBlock>1/x</TextBlock>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
